@@ -43,6 +43,8 @@ def index():
 
 
 # 🚀 Use dynamic port for Render
+import os
+
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Get the PORT assigned by Render
+    port = int(os.environ.get("PORT", 5000))  # Get Render's assigned PORT
     app.run(host="0.0.0.0", port=port, debug=True)
