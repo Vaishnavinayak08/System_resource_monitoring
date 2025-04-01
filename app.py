@@ -1,8 +1,8 @@
+import os
 import time
 from flask import Flask, jsonify, render_template
 import psutil
 from collections import deque
-import os
 
 app = Flask(__name__)
 
@@ -42,6 +42,7 @@ def index():
     return render_template('index.html')
 
 
+# 🚀 Use dynamic port for Render
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Dynamically get PORT for deployment
+    port = int(os.environ.get("PORT", 5000))  # Get the PORT assigned by Render
     app.run(host="0.0.0.0", port=port, debug=True)
