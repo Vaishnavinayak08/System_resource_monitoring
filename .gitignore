@@ -1,2 +1,9 @@
-.vercel
-.venv
+node_modules/
+dist/
+venv/
+__pycache__/
+*.pyc
+*.exe
+*.blockmap
+*.log
+.DS_Store
