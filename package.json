@@ -16,7 +16,10 @@
     "electron": "^29.0.0",
     "electron-builder": "^26.0.12"
   },
-  "author": "Your Name",
+  "author": {
+    "name":"Vaishnavi",
+    "email":"nayakvaishnavi88@gmail.com"
+  },
   "license": "ISC",
   "build": {
   "appId": "com.yourapp.id",
