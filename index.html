@@ -60,6 +60,7 @@
     </div>
 
     <script>
+        const { ipcRenderer } = require('electron');
         let cpuChart, memoryChart, diskChart, networkChart;
 
         function initCharts() {
@@ -86,34 +87,26 @@
             });
         }
 
-        async function fetchStats() {
-            try {
-                const response = await fetch('http://localhost:3000/stats');
-                const data = await response.json();
-
-                cpuChart.data.labels.push(new Date().toLocaleTimeString());
-                cpuChart.data.datasets[0].data.push(data.cpu_usage);
-                if (cpuChart.data.labels.length > 10) {
-                    cpuChart.data.labels.shift();
-                    cpuChart.data.datasets[0].data.shift();
-                }
-                cpuChart.update();
-
-                memoryChart.data.datasets[0].data = [data.memory_usage];
-                memoryChart.update();
-
-                diskChart.data.datasets[0].data = [data.disk_usage, 100 - data.disk_usage];
-                diskChart.update();
-
-                networkChart.data.datasets[0].data = [data.upload_speed, data.download_speed];
-                networkChart.update();
-            } catch (error) {
-                console.error("Error fetching stats:", error);
-            }
+        ipcRenderer.on('system-stats', (event, data) => {
+        cpuChart.data.labels.push(new Date().toLocaleTimeString());
+        cpuChart.data.datasets[0].data.push(data.cpu_usage);
+        if (cpuChart.data.labels.length > 10) {
+            cpuChart.data.labels.shift();
+            cpuChart.data.datasets[0].data.shift();
         }
+        cpuChart.update();
 
-        initCharts();
-        setInterval(fetchStats, 1000);
+        memoryChart.data.datasets[0].data = [data.memory_usage];
+        memoryChart.update();
+
+        diskChart.data.datasets[0].data = [data.disk_usage, 100 - data.disk_usage];
+        diskChart.update();
+
+        networkChart.data.datasets[0].data = [data.upload_speed, data.download_speed];
+        networkChart.update();
+    });
+
+    initCharts();
     </script>
 </body>
 </html>
