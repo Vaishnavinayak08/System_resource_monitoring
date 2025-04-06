@@ -35,10 +35,9 @@
       "icon": "icon.icns"
     }
   },
-  "dependencies": {
-    "electron": "^29.4.6"
-  },
+
   "devDependencies": {
+    "electron": "^29.4.6",
     "electron-builder": "^26.0.12",
     "@electron/rebuild": "^3.3.0"
   }
